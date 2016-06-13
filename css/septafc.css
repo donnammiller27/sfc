@@ -1,0 +1,146 @@
+body {
+  font-size: 20px;
+}
+
+label {
+  width: 70%;	
+  margin-bottom: 10px;
+  color: #555555;
+  font-weight: normal;
+  text-align: center;  
+}
+
+legend, fieldset {
+  border:none;	
+  color: #555555;
+}	
+
+select {
+  width: 70%;  
+  color: #555555;
+  font-size: 20px;
+}
+
+input[type="number"] {
+  width: 50%;
+  color: #555555;
+  text-align: center;
+  font-size: 18px;
+}
+
+.fare-container {
+  width: 40%;
+  height: .1%;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 1% 1% 1% 1%; 
+  background-color:#FDFDFD;
+  color: #575757;
+  
+  text-align:center;
+} 
+
+.fare-radio-container {
+  width: 32%;
+  height: .1%;	
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 1% 1% 1% 9%;
+  background-color:#FDFDFD;
+  color: #575757;
+  
+}
+
+
+.fare-header-container {
+  width: 42%;
+  height: .08%; 	
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 0; 
+  background-color: #555555;
+  color: white;  
+  text-align: center;
+}  
+
+.fare-footer-container {
+  width: 40%;
+  height: .1%;	
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 1% 1% 1% 1%;
+  background-color: #555555;
+  color: white;
+  text-align: center;
+}
+
+.fare-helper-text {
+  font-size: 20px;
+  font-weight: normal;
+  padding-top: .2%;
+}
+
+
+.fare-radio-btn {	
+  margin:0 0 0 30px;  
+  padding: 0;
+}
+
+.fare-total {
+  font-size: 40px;
+} 
+
+.septalogo {	
+  width: 10%;
+  height: 10%;
+  vertical-align: middle;
+  margin-right: 5%;
+}	
+
+
+@media screen and (max-width: 768px) {
+ 	
+select {
+  width: 70%;  
+  color: #555555;
+  font-size: 15px;
+}
+
+.fare-container {
+  width: 70%;
+}  
+.fare-header-container {
+  width: 72%;
+}
+
+.fare-footer-container {
+  width: 70%;
+}  
+
+.fare-radio-container {
+  width: 59%;
+  height: .1%;	
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 1% 5% 1% 8%; 
+  background-color:#FDFDFD;
+  color: #575757;  
+  text-align:center;
+} 
+
+.fare-radio-btn {	
+  margin:0 0 0 0;  
+  text-align: left;
+}
+
+.septalogo {
+	
+	width: 15%;
+	height: 15%;
+	margin-right: 2%;	
+}	
+
+}
+
+
+
