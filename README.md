@@ -1,6 +1,4 @@
-# SEPTA Rail Fare Calculator Interactive Fare Purchase Widget
-  (jquery plugin)
-
+# Responsive Interactive Septa Fare Calulator Widget
 
 When you take regional rail in and out of the city, the fare price
 is affected by where you purchase the ticket, when you ride, and how
@@ -12,23 +10,28 @@ The information is compiled into this [JSON file](fares.json).
 
 When you change any input information, the fare is automatically recalculated.
 
-To use the widget:
+## Getting Started
+In your html:
 
-  In your html:  
+- use the css/septafc.css stylesheet. 
   
-    `<link href="css/septafc.css" rel="stylesheet">`		
-
-  To set the widget:
-    `<div id="septafc"></div>`
+- To create the widget, just set an id tag between two divs:
+  `<div id="septafc"></div>`
     
-  
-  Before the `</body>` tag:
-    You need to load jquery
-             and
-    `<script src="js/septafc.js"></script>`     
+- Source the javascript:  
+  `<script src="js/septafc.js"></script>`     
 
     
-  In your javascript on ready: 
+In your javascript on ready: 
 
-  $.('#septafc').septaFareCalculator();
+$.('#septafc').septaFareCalculator();
+
+
+### Prerequisites
+You need to source:
+
+Jquery
+
+```
+
 
