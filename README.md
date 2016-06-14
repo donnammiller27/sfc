@@ -1,4 +1,4 @@
-# Responsive Interactive Septa Fare Calulator Widget
+# Responsive Interactive Septa Fare Calculator Widget
 
 When you take regional rail in and out of the city, the fare price
 is affected by where you purchase the ticket, when you ride, and how
@@ -30,7 +30,7 @@ $.('#septafc').septaFareCalculator();
 ### Prerequisites
 You need to source:
 
-Jquery
+JQuery
 
 ```
 
