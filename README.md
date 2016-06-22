@@ -10,12 +10,17 @@ The information is compiled into this [JSON file](fares.json).
 
 When you change any input information, the fare is automatically recalculated.
 
+![Alt septa fare calculator](septafc.tiff?raw=true "Septa Fare Calculator")
+
 ## Getting Started
+
+Put fares.json and septafc.html in your application top-level directory.
+
 In your html:
 
 - use the css/septafc.css stylesheet. 
   
-- To create the widget, just set an id tag between two divs:
+- To create the widget, just set an id tag on a div:
   `<div id="septafc"></div>`
     
 - Source the javascript:  
@@ -28,9 +33,11 @@ $.('#septafc').septaFareCalculator();
 
 
 ### Prerequisites
-You need to source:
 
-JQuery
+You need jquery:
+
+'<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>'
+
 
 ```
 

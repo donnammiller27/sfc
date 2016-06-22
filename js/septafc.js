@@ -1,70 +1,6 @@
 //global to hold JSON data
 var JSON_FARES="";
 
-//html for septra fare calculator widget
-var fareWidgetHtml = function() {
-	return '<div class="fare-header-container">'+	
-	'<h2><img class="septalogo" src="img/64px-SEPTA.svg.png" />'+
-	 'Regional Rails Fares</h2>'+
-	 '</div>'+ 
-         
-         '<form id="sfform">' +
-         
-         '<div class="fare-container">'+
-           '<div id="farezone">'+
-             '<fieldset>'+
-               '<p>'+
-                 '<label for="sfzone"><b>Where are you going?</b></label>'+
-                 '<br><br>'+
-                 '<select id="sfzone">'+
-                 '</select>'+
-               '</p>'+
-             '</fieldset>'+
-           '</div>'+
-         '</div>'+         
-         '<div class="fare-container">'+
-           '<div id="faretype">'+
-            '<fieldset>'+
-               '<p>'+
-                 '<label for="sftype"><b>When are you riding?</b></label>'+
-                 '<br><br>'+
-                 '<select id="sftype">'+
-                 '</select>'+
-               '</p>'+
-             '</fieldset>'+
-             '<div class="fare-helper-text" id="type-helptext"></div>'+
-           '</div>'+
-         '</div>'+
-         
-         '<div class="fare-radio-container" >'+
-           '<div id="farepurchase">'+
-            '<fieldset>'+
-              '<legend><b>Where will you purchase the fare?<b></legend><br>'+
-                '<p class="fare-radio-btn">'+
-                  '<input type="radio" name="sfpurchase" id="advance_purchase" value="advance_purchase">'+
-                  '<label for="kiosk">Station Kiosk</label>'+
-                '</p>'+
-                '<p class="fare-radio-btn">'+
-                  '<input type="radio" name="sfpurchase" id="onboard_purchase" value="onboard_purchase">'+
-                  '<label for="onboard">Onboard</label>'+
-                '</p>'+
-            '</fieldset>'+ 
-           '</div>'+
-         '</div>'+         
-         '<div class="fare-container">'+
-           '<fieldset>'+
-             '<p><label for="fareqty"><b>How many rides will you need?</b></label><br><br>'+
-             '<input type="number" id="fareqty" min=0 value=0></p>'+
-           '</fieldset>'+
-         '</div>'+
-         
-         '</form>' +
-         '<div class="fare-footer-container">'+
-            '<p><b>You fare will cost</b></p>'+           
-            '<div class="fare-total" id="totalfare"><b>$0.00</b></div>'+
-         '</div>';
-}
-
 //populate sfzone with names and zone values
 var typeHtml = function() {
  var sftypeHtml = '';
@@ -115,9 +51,16 @@ var zoneHtml = function() {
   return sfzoneHtml;  
 }
 
-// get JSON via AJAX and store data in global variable JSON_FARES
-// populate select options for zones and types from JSON
-function load_JSON() {
+
+
+
+//plugin septa fare calculator
+$.fn.septaFareCalculator = function() {
+//populate HTML	
+  $(this).load('septafc.html');  
+ 
+  // get JSON via AJAX and store data in global variable JSON_FARES
+  // populate select options for zones and types from JSON	
   $.ajax({
             url: 'fares.json',
             type: 'GET',
@@ -126,50 +69,36 @@ function load_JSON() {
               JSON_FARES = data;
               //populate sfzone with JSON names and zone values  
               $('#sfzone').html(zoneHtml());          
-              
-            }  
+              $('#sftype').html(typeHtml);
+	      $('#advance_purchase').prop('checked', true);
+
+              // on change, display matching help text for selected type value
+              $('#sftype').change(function () {     		  
+                $('#type-helptext').html(JSON_FARES.info[$(this).val()]);
+                // anytime can only be an advance_purchase, so disable onboard 
+                // and check advance_purchase
+                if ($('#sftype').val() == "anytime") {
+                  $('#onboard_purchase').prop('disabled', true);
+                  $('#advance_purchase').prop('checked', true);
+                } else {
+                  $('#onboard_purchase').prop('disabled', false);
+                } 
+               });  
+
+               $('#sfform').change(function() {
+              // recalc computed fare based on inputs
+                var fzone = $('#sfzone').val();
+                var ftype = $('#sftype').val();    
+                var fpurchase = $('input[name=sfpurchase]:checked').val();
+                var fqty = $('#fareqty').val();    
+    
+                $('#totalfare').html('$' + calcFare(fzone, ftype, fpurchase, fqty).toFixed(2)); 
+
+              });  
+
+           }  
              
   });
-}
-
-
-//plugin septa fare calculator
-$.fn.septaFareCalculator = function() {
-//populate HTML	
-  this.html(fareWidgetHtml);
-  
-// read in JSON and populate zones 		
-  load_JSON();
-  
-//populate sftype with fare type values  
-  $('#sftype').html(typeHtml);		
-  $('#advance_purchase').prop('checked', true);
-
-// on change, display matching help text for selected type value
-  $('#sftype').change(function () {     		  
-    //$('#type-helptext').displayText($(this).val());
-    $('#type-helptext').html(JSON_FARES.info[$(this).val()]);
-   // anytime can only be an advance_purchase, so disable onboard 
-   // and check advance_purchase
-    if ($('#sftype').val() == "anytime") {
-      $('#onboard_purchase').prop('disabled', true);
-      $('#advance_purchase').prop('checked', true);
-    } else {
-      $('#onboard_purchase').prop('disabled', false);
-    } 
-  });  
-  
-
- $('#sfform').change(function() {
- // recalc computed fare based on inputs
-    var fzone = $('#sfzone').val();
-    var ftype = $('#sftype').val();    
-    var fpurchase = $('input[name=sfpurchase]:checked').val();
-    var fqty = $('#fareqty').val();    
-    
-    $('#totalfare').html('$' + calcFare(fzone, ftype, fpurchase, fqty).toFixed(2)); 
-
-  });  
 
    return this;
 }		
