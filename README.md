@@ -10,7 +10,7 @@ The information is compiled into this [JSON file](fares.json).
 
 When you change any input information, the fare is automatically recalculated.
 
-![Alt septa fare calculator](septafc.tiff?raw=true "Septa Fare Calculator")
+![Widget mockup](septafc.png)
 
 ## Getting Started
 
@@ -35,7 +35,6 @@ $.('#septafc').septaFareCalculator();
 ### Prerequisites
 
 You need jquery:
-
 '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>'
 
 
